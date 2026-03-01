@@ -539,6 +539,7 @@ function QuestsPage() {
 
 export function App() {
   const location = useLocation();
+  const contentMainRef = useRef<HTMLElement | null>(null);
   const isCharacterRoute = location.pathname === '/character';
   const [selectedSkillGroup, setSelectedSkillGroup] = useState<string | null>(
     siteContent.skills[0]?.title ?? null
@@ -582,6 +583,34 @@ export function App() {
     event.preventDefault();
     handleOpenMessenger();
   };
+
+  useEffect(() => {
+    const mainElement = contentMainRef.current;
+    if (!mainElement) {
+      return;
+    }
+
+    const focusableSelector = [
+      'button:not([disabled])',
+      'a[href]',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ');
+
+    const firstInteractiveElement = mainElement.querySelector<HTMLElement>(
+      focusableSelector
+    );
+
+    if (!firstInteractiveElement) {
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      firstInteractiveElement.focus({ preventScroll: true });
+    });
+  }, [location.pathname]);
 
   return (
     <div className="page-bg">
@@ -631,7 +660,7 @@ export function App() {
             </div>
           </aside>
 
-          <main className="content-stack">
+          <main ref={contentMainRef} className="content-stack">
             <Routes>
               <Route path="/" element={<Navigate to="/character" replace />} />
               <Route
