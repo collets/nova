@@ -9,6 +9,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AppDialog } from './components/ui/app-dialog';
 import { DialogCloseButton } from './components/ui/dialog-close-button';
 import { MenuList } from './components/ui/menu-list';
+import { PageHeader } from './components/ui/page-header';
 import { TagChip } from './components/ui/tag-chip';
 import { siteContent } from './content/site-content';
 
@@ -24,25 +25,18 @@ function CharacterPage({ onOpenMessenger }: CharacterPageProps) {
       value: siteContent.config.role,
       valueClassName: 'stat-value-accent',
     },
-    { label: 'Alignment', value: 'Lawful Creative', valueClassName: 'stat-value-success' },
-    { label: 'Homeland', value: 'Remote Realm' },
-    { label: 'Current Quest', value: 'Refactoring The Kingdom UI' },
-    { label: 'Guild', value: 'Frontend Order' },
-    { label: 'Specialty', value: 'Design Systems & React Architecture' },
-    { label: 'Timezone', value: 'CET (UTC+1)' },
-    { label: 'Availability', value: 'Open For Selected Quests' },
-    { label: 'Focus', value: 'Performance, Accessibility, DX' },
+    { label: 'Alignment', value: 'Proactive Team Player', valueClassName: 'stat-value-success' },
+    { label: 'Homeland', value: "Fiesso d'Artico, VE, Italy" },
+    { label: 'Experience', value: '10+ Years' },
+    { label: 'Current Guild', value: 'Docebo Spa (Full Remote)' },
+    { label: 'Core Stack', value: 'TypeScript, Angular, A11y' },
+    { label: 'Tooling', value: 'Nx, GitLab CI, pnpm, Playwright' },
+    { label: 'Cloud', value: 'AWS, Docker, Kubernetes' },
+    { label: 'Languages', value: 'Italian, English' },
   ];
 
   return (
     <section id="character" className="character-sheet">
-      <div className="character-title-row">
-        <span className="character-title-glyph" aria-hidden="true">
-          ✦
-        </span>
-        <h2 className="ui-title">Character Sheet</h2>
-      </div>
-
       <div className="character-grid">
         <div className="character-top-row">
           <article className="panel character-portrait-card">
@@ -56,48 +50,46 @@ function CharacterPage({ onOpenMessenger }: CharacterPageProps) {
             <p className="character-portrait-caption">The Interface Alchemist</p>
           </article>
 
-          <div className="character-top-side">
-            <article className="panel character-equipment">
-              <h3 className="ui-subtitle">Equipment</h3>
-              <div className="equipment-grid">
-                <span className="equipment-slot">
-                  <span className="material-symbols-outlined equipment-icon">
-                    keyboard
-                  </span>
+          <article className="panel character-equipment">
+            <h3 className="ui-subtitle">Equipment</h3>
+            <div className="equipment-grid">
+              <span className="equipment-slot">
+                <span className="material-symbols-outlined equipment-icon">
+                  keyboard
                 </span>
-                <span className="equipment-slot">
-                  <span className="material-symbols-outlined equipment-icon">
-                    mouse
-                  </span>
+              </span>
+              <span className="equipment-slot">
+                <span className="material-symbols-outlined equipment-icon">
+                  mouse
                 </span>
-                <span className="equipment-slot">
-                  <span className="material-symbols-outlined equipment-icon">
-                    terminal
-                  </span>
+              </span>
+              <span className="equipment-slot">
+                <span className="material-symbols-outlined equipment-icon">
+                  terminal
                 </span>
-              </div>
-            </article>
+              </span>
+            </div>
+          </article>
 
-            <article className="panel character-stats">
-              <div className="stats-grid">
-                {characterInfo.map((entry, index) => (
-                  <div key={entry.label} className="stat-item">
-                    <p className="stat-label">{entry.label}</p>
-                    <p
-                      className={`stat-value${
-                        entry.valueClassName ? ` ${entry.valueClassName}` : ''
-                      }`}
-                    >
-                      {entry.value}
-                    </p>
-                    {index < characterInfo.length - 1 ? (
-                      <span className="stat-divider" aria-hidden="true" />
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            </article>
-          </div>
+          <article className="panel character-stats">
+            <div className="stats-grid">
+              {characterInfo.map((entry, index) => (
+                <div key={entry.label} className="stat-item">
+                  <p className="stat-label">{entry.label}</p>
+                  <p
+                    className={`stat-value${
+                      entry.valueClassName ? ` ${entry.valueClassName}` : ''
+                    }`}
+                  >
+                    {entry.value}
+                  </p>
+                  {index < characterInfo.length - 1 ? (
+                    <span className="stat-divider" aria-hidden="true" />
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </article>
         </div>
 
         <div className="character-bottom-row">
@@ -205,13 +197,6 @@ function SkillsPage({ selectedSkillGroup, onSelect }: SkillsPageProps) {
 
   return (
     <section id="skills" className="skills-section">
-      <div className="character-title-row">
-        <span className="character-title-glyph" aria-hidden="true">
-          ✦
-        </span>
-        <h2 className="ui-title skills-title">Skill Book</h2>
-      </div>
-
       <div className="skills-categories">
         {siteContent.skills.map((group) => (
           <div key={group.title} className="skill-category-slot">
@@ -432,13 +417,6 @@ function QuestsPage() {
 
   return (
     <section id="quests" className="quests-section">
-      <div className="character-title-row">
-        <span className="character-title-glyph" aria-hidden="true">
-          ✦
-        </span>
-        <h2 className="ui-title">Quest Board</h2>
-      </div>
-
       <div className="quests-grid-wrap">
         <div className="quests-grid">
           {quests.map((quest) => (
@@ -541,6 +519,8 @@ export function App() {
   const location = useLocation();
   const contentMainRef = useRef<HTMLElement | null>(null);
   const isCharacterRoute = location.pathname === '/character';
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isMobileMenuViewport, setIsMobileMenuViewport] = useState(false);
   const [selectedSkillGroup, setSelectedSkillGroup] = useState<string | null>(
     siteContent.skills[0]?.title ?? null
   );
@@ -557,14 +537,14 @@ export function App() {
       id: 'guild',
       title: 'Guild Network',
       detail: 'View Professional Rank',
-      href: 'https://www.linkedin.com/in/simone-coletta',
+      href: 'https://www.linkedin.com/in/colettasimone',
       iconKind: 'scroll-blue' as const,
     },
     {
       id: 'repository',
       title: 'Ancient Repository',
       detail: 'Inspect Source Spells',
-      href: 'https://github.com/scoletta',
+      href: 'https://github.com/collets',
       iconKind: 'scroll-red' as const,
     },
   ];
@@ -581,6 +561,7 @@ export function App() {
     }
 
     event.preventDefault();
+    setIsNavOpen(false);
     handleOpenMessenger();
   };
 
@@ -591,7 +572,7 @@ export function App() {
     }
 
     const focusableSelector = [
-      'button:not([disabled])',
+      'button:not([disabled]):not([data-focus-ignore])',
       'a[href]',
       'input:not([disabled])',
       'select:not([disabled])',
@@ -612,52 +593,131 @@ export function App() {
     });
   }, [location.pathname]);
 
+  useEffect(() => {
+    setIsNavOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isNavOpen) {
+      return;
+    }
+
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsNavOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [isNavOpen]);
+
+  useEffect(() => {
+    if (!isNavOpen || !isMobileMenuViewport) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isNavOpen, isMobileMenuViewport]);
+
+  useEffect(() => {
+    const update = () => setIsMobileMenuViewport(window.innerWidth <= 850);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const handleOpenMenu = () => {
+    setIsMobileMenuViewport(window.innerWidth <= 850);
+    setIsNavOpen(true);
+  };
+
+  const currentPageTitle = (() => {
+    if (location.pathname.startsWith('/skills')) {
+      return 'Skill Book';
+    }
+    if (location.pathname.startsWith('/quests')) {
+      return 'Quest Board';
+    }
+    return 'Character Sheet';
+  })();
+
+  const renderSidebarContent = (showInlineClose: boolean) => (
+    <>
+      {showInlineClose ? (
+        <button
+          type="button"
+          className="pixel-button nav-close-inline"
+          onClick={() => setIsNavOpen(false)}
+        >
+          Close Menu
+        </button>
+      ) : null}
+      <div className="sidebar-profile">
+        {/*
+          Keep portrait hidden on Character for desktop/tablet, but always show it
+          inside the mobile menu panel.
+        */}
+        {!isCharacterRoute || (showInlineClose && isMobileMenuViewport) ? (
+          <img
+            src="/portrait.png"
+            alt="Character placeholder portrait"
+            className="sidebar-avatar"
+          />
+        ) : null}
+        <h1 className="sidebar-name">{siteContent.config.name}</h1>
+        <p className="sidebar-role">{siteContent.config.role}</p>
+        <div className="sidebar-progress">
+          <p className="ui-label">experience</p>
+          <div className="meter">
+            <span className="meter-fill meter-fill--xp" />
+          </div>
+          <p className="sidebar-level">Level 10 (years)</p>
+        </div>
+      </div>
+
+      <div className="sidebar-menu">
+        <h2 className="ui-label">menu</h2>
+        <MenuList items={siteContent.nav} onItemSelect={handleMenuSelect} />
+      </div>
+
+      <div className="panel sidebar-stats">
+        <div className="stat-entry">
+          <span>Reliability</span>
+          <span>100%</span>
+        </div>
+        <div className="meter meter--small">
+          <span className="meter-fill meter-fill--hp" />
+        </div>
+        <div className="stat-entry">
+          <span>Focus</span>
+          <span>100%</span>
+        </div>
+        <div className="meter meter--small">
+          <span className="meter-fill meter-fill--mp" />
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <div className="page-bg">
       <div className="pixel-grid-overlay" aria-hidden="true" />
       <div className="site-shell">
+        <PageHeader
+          title={currentPageTitle}
+          icon="✦"
+          isMenuOpen={isNavOpen}
+          onOpenMenu={handleOpenMenu}
+        />
         <div className="layout-grid">
-          <aside className="panel side-nav">
-            <div className="sidebar-profile">
-              {!isCharacterRoute ? (
-                <img
-                  src="/portrait.png"
-                  alt="Character placeholder portrait"
-                  className="sidebar-avatar"
-                />
-              ) : null}
-              <h1 className="sidebar-name">{siteContent.config.name}</h1>
-              <p className="sidebar-role">{siteContent.config.role}</p>
-              <div className="sidebar-progress">
-                <p className="ui-label">experience</p>
-                <div className="meter">
-                  <span className="meter-fill meter-fill--xp" />
-                </div>
-                <p className="sidebar-level">Level 10 (years)</p>
-              </div>
-            </div>
-
-            <div className="sidebar-menu">
-              <h2 className="ui-label">menu</h2>
-              <MenuList items={siteContent.nav} onItemSelect={handleMenuSelect} />
-            </div>
-
-            <div className="panel sidebar-stats">
-              <div className="stat-entry">
-                <span>Reliability</span>
-                <span>100%</span>
-              </div>
-              <div className="meter meter--small">
-                <span className="meter-fill meter-fill--hp" />
-              </div>
-              <div className="stat-entry">
-                <span>Focus</span>
-                <span>100%</span>
-              </div>
-              <div className="meter meter--small">
-                <span className="meter-fill meter-fill--mp" />
-              </div>
-            </div>
+          <aside className={`panel side-nav side-nav--desktop${isNavOpen ? ' is-open' : ''}`}>
+            {renderSidebarContent(isNavOpen)}
           </aside>
 
           <main ref={contentMainRef} className="content-stack">
@@ -665,7 +725,11 @@ export function App() {
               <Route path="/" element={<Navigate to="/character" replace />} />
               <Route
                 path="/character"
-                element={<CharacterPage onOpenMessenger={handleOpenMessenger} />}
+                element={
+                  <CharacterPage
+                    onOpenMessenger={handleOpenMessenger}
+                  />
+                }
               />
               <Route
                 path="/skills"
@@ -676,16 +740,26 @@ export function App() {
                   />
                 }
               />
-              <Route
-                path="/quests"
-                element={<QuestsPage />}
-              />
+              <Route path="/quests" element={<QuestsPage />} />
               <Route path="/messenger" element={<Navigate to="/character" replace />} />
               <Route path="*" element={<Navigate to="/character" replace />} />
             </Routes>
           </main>
         </div>
       </div>
+
+      <AppDialog
+        isOpen={isNavOpen && isMobileMenuViewport}
+        onRequestClose={() => setIsNavOpen(false)}
+        ariaLabelledBy="site-nav-title"
+        dialogClassName="side-nav-dialog"
+        panelClassName="side-nav side-nav--dialog"
+      >
+        <h2 id="site-nav-title" className="sr-only">
+          Site menu
+        </h2>
+        {renderSidebarContent(true)}
+      </AppDialog>
 
       <AppDialog
         isOpen={isContactDialogOpen}

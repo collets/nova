@@ -5,9 +5,9 @@ export const siteContent: SiteContent = {
     name: 'Simone Coletta',
     role: 'Senior Frontend Developer',
     tagline:
-      'I build clean, fast web interfaces with strong visual direction and practical UX.',
+      'Senior frontend developer with 10+ years shipping scalable web applications, UI systems, and high-impact delivery pipelines.',
     primaryCta: {
-      label: 'View Quests',
+      label: 'View Quest Board',
       href: '/quests',
     },
   },
@@ -18,57 +18,57 @@ export const siteContent: SiteContent = {
     { id: 'messenger', label: 'Messenger', href: '/messenger' },
   ],
   about: [
-    'I design and build web interfaces that feel intentional: strong visual systems, clear information hierarchy, and smooth interactions that stay fast under real-world constraints.',
-    'My core focus is frontend architecture with TypeScript and React, but I enjoy owning the full delivery loop: planning, implementation, testing, CI/CD, and production hardening.',
-    'This page is a placeholder profile in a tactical pixel UI style. I will replace this with my real background, selected case studies, and links to active work.',
+    "I am a Senior Frontend Developer based in Fiesso d'Artico (Venice, Italy), focused on complex and high-performance web applications with modern frontend frameworks.",
+    'Over the last decade, I built advanced UI components, optimized engineering workflows (CI/CD, monorepos, AWS), and delivered maintainable solutions with strong attention to accessibility, reliability, and developer experience.',
+    'I work best in collaborative product teams, bring proactive technical leadership when needed, and keep exploring new practices to ship scalable software with consistent impact.',
   ],
   skills: [
     {
       title: 'Core Arcana',
       icon: '◆',
       description:
-        'Foundational magic used to craft fast, scalable interface systems.',
-      focus: ['Component architecture', 'Reusable patterns', 'Strong typing'],
+        'Primary frontend expertise used to build robust and accessible products.',
+      focus: ['JavaScript / TypeScript', 'Angular', 'HTML / CSS / SASS', 'A11y'],
       items: [
         {
-          name: 'TypeScript Mastery',
+          name: 'TypeScript & JavaScript',
           description:
-            'Designs strict and expressive type systems that reduce runtime uncertainty across large-scale applications, improve refactor safety, and keep shared domain models coherent between teams and delivery streams.',
+            'Builds type-safe and maintainable application logic with modern JavaScript and TypeScript patterns across large codebases.',
           rank: 'Legendary',
           badge: { kind: 'ring' },
         },
         {
-          name: 'React Composition',
+          name: 'Angular Architecture',
           description:
-            'Builds resilient component trees with clean boundaries and predictable state.',
+            'Designs scalable Angular application structures and reusable component patterns for complex enterprise interfaces.',
           rank: 'Grandmaster',
           badge: { kind: 'shield' },
         },
         {
-          name: 'Statecraft Patterns',
+          name: 'Semantic HTML & CSS',
           description:
-            'Orchestrates local and global state with pragmatic architecture choices.',
+            'Creates clean, responsive interfaces using semantic HTML and scalable CSS/SASS styling systems.',
           rank: 'Master',
           badge: { kind: 'sword' },
         },
         {
-          name: 'Semantic Markup',
+          name: 'Accessibility Engineering',
           description:
-            'Creates accessible structures that stay robust across devices and assistive tech.',
+            'Applies accessibility-first practices to keep keyboard, semantics, and assistive technology support production-ready.',
           rank: 'Expert',
           badge: { kind: 'pendant' },
         },
         {
-          name: 'Performance Tracing',
+          name: 'Redux & State Patterns',
           description:
-            'Profiles and removes rendering bottlenecks for fluid, responsive UI.',
-          rank: 'Master',
+            'Implements predictable state-management flows with Redux and pragmatic architecture decisions.',
+          rank: 'Expert',
           badge: { kind: 'armor' },
         },
         {
-          name: 'Animation Timing',
+          name: 'LESS & Styling Legacy',
           description:
-            'Uses motion intentionally to guide attention without sacrificing clarity.',
+            'Maintains and migrates legacy styling systems while preserving quality and delivery speed.',
           rank: 'Adept',
           badge: { kind: 'ring' },
         },
@@ -78,48 +78,48 @@ export const siteContent: SiteContent = {
       title: 'Toolsmithing',
       icon: '⚙',
       description:
-        'Automation and workflow enchantments that keep teams fast at scale.',
-      focus: ['Monorepo workflows', 'Automated quality gates', 'Release flow'],
+        'Tooling and infrastructure practices that accelerate delivery at scale.',
+      focus: ['Nx', 'GitLab CI', 'pnpm / npm', 'AWS & Containers'],
       items: [
         {
-          name: 'Nx Monorepo Forge',
+          name: 'Nx Monorepo Ownership',
           description:
-            'Shapes project graphs, boundaries, and targets for reliable developer flow, faster incremental builds, and predictable CI execution even when multiple teams deliver features in parallel across shared codebases.',
+            'Owns monorepo architecture, task orchestration, and workspace conventions to keep multi-team delivery efficient and reliable.',
           rank: 'Legendary',
           badge: { kind: 'armor' },
         },
         {
-          name: 'CI Pipeline Rituals',
+          name: 'CI/CD Pipeline Engineering',
           description:
-            'Designs deterministic pipelines with fast feedback and strong quality gates.',
+            'Designs and maintains fast, deterministic pipelines in GitLab CI with strong quality gates and clear feedback loops.',
           rank: 'Grandmaster',
           badge: { kind: 'shield' },
         },
         {
-          name: 'Testing Arsenal',
+          name: 'Test Automation',
           description:
-            'Builds practical test suites that protect releases without slowing delivery.',
+            'Builds reliable quality suites with Jest, Jasmine, component testing, and Playwright end-to-end coverage.',
           rank: 'Master',
           badge: { kind: 'sword' },
         },
         {
-          name: 'Release Automation',
+          name: 'Cloud & Infra Integration',
           description:
-            'Automates versioning, changelogs, and deployments across environments.',
+            'Delivers cloud-aware frontend systems using AWS services, IaC practices, and production deployment workflows.',
           rank: 'Expert',
           badge: { kind: 'pendant' },
         },
         {
-          name: 'Linting Enforcement',
+          name: 'Containerized Delivery',
           description:
-            'Maintains code quality through consistent standards and actionable rules.',
+            'Integrates Docker and Kubernetes workflows to align frontend delivery with modern platform standards.',
           rank: 'Expert',
           badge: { kind: 'ring' },
         },
         {
-          name: 'Observability Hooks',
+          name: 'Microfrontend Strategy',
           description:
-            'Connects logs, metrics, and alerts to reduce time-to-resolution.',
+            'Applies modular frontend architecture and integration strategies across independently evolving teams.',
           rank: 'Adept',
           badge: { kind: 'sword' },
         },
@@ -129,48 +129,53 @@ export const siteContent: SiteContent = {
       title: 'Product Alchemy',
       icon: '✦',
       description:
-        'Product execution focused on clarity, outcomes, and long-term UX health.',
-      focus: ['UX clarity', 'Accessibility', 'Performance perception'],
+        'Execution mindset balancing product outcomes, leadership, and team health.',
+      focus: [
+        'Technical Leadership',
+        'Teamworking',
+        'Proactivity',
+        'Continuous Learning',
+      ],
       items: [
         {
-          name: 'Interaction Design',
+          name: 'Technical Leadership',
           description:
-            'Turns complex workflows into intuitive and readable interface journeys.',
-          rank: 'Legendary',
+            'Provides practical technical guidance and helps teams converge on scalable frontend decisions.',
+          rank: 'Grandmaster',
           badge: { kind: 'sword' },
         },
         {
-          name: 'Design Systems',
+          name: 'Cross-Team Collaboration',
           description:
-            'Builds cohesive UI kits and tokenized foundations that scale across products.',
-          rank: 'Grandmaster',
+            'Works effectively across design, product, and engineering to deliver coherent and maintainable user experiences.',
+          rank: 'Legendary',
           badge: { kind: 'shield' },
         },
         {
-          name: 'Accessibility Craft',
+          name: 'Product-Focused Delivery',
           description:
-            'Ensures inclusive experiences with keyboard-first and screen-reader-ready flows.',
+            'Prioritizes measurable impact, usability, and maintainability when making frontend architecture choices.',
           rank: 'Master',
           badge: { kind: 'pendant' },
         },
         {
-          name: 'Conversion UX',
+          name: 'Deep Focus Execution',
           description:
-            'Optimizes critical paths with measurable experiments and content hierarchy.',
+            'Thrives in remote setups that require ownership, strong communication, and consistent delivery quality.',
           rank: 'Expert',
           badge: { kind: 'ring' },
         },
         {
-          name: 'Performance Perception',
+          name: 'Proactive Problem Solving',
           description:
-            'Uses skeletons, transitions, and instant feedback to improve perceived speed.',
+            'Anticipates technical risks early and drives practical solutions before they impact release quality.',
           rank: 'Master',
           badge: { kind: 'armor' },
         },
         {
-          name: 'Stakeholder Sync',
+          name: 'Curiosity & Growth',
           description:
-            'Aligns product, design, and engineering through concise technical communication.',
+            'Constantly explores better practices, tools, and workflows to evolve both product quality and team efficiency.',
           rank: 'Adept',
           badge: { kind: 'shield' },
         },
@@ -179,69 +184,52 @@ export const siteContent: SiteContent = {
   ],
   projects: [
     {
-      id: 'project-1',
-      title: 'Project One',
+      id: 'docebo',
+      title: 'Docebo Spa | Senior Frontend Developer',
       summary:
-        'Portfolio-ready web app with strong interaction design and production-grade code quality.',
-      tech: ['React', 'TypeScript', 'Vite'],
+        'Owned core Angular UI Kit components (data table, calendar, virtual scroll), led Nx monorepo and GitLab CI initiatives, and contributed to architecture and infra guidance across teams.',
+      tech: ['Angular', 'Nx', 'GitLab CI', 'AWS'],
       badge: { kind: 'sword' },
-      liveUrl: 'https://example.com',
-      codeUrl: 'https://github.com/example/repo-1',
+      liveUrl: 'https://www.docebo.com',
     },
     {
-      id: 'project-2',
-      title: 'Project Two',
+      id: 'siav',
+      title: 'SIAV Spa | Frontend Developer',
       summary:
-        'Internal dashboard that improved team velocity through better information architecture.',
-      tech: ['Nx', 'React', 'Testing Library'],
+        'Built key Angular interfaces for a document management product on top of microservices, with strong focus on UX and usability, while also supporting technical leadership activities.',
+      tech: ['Angular', 'Microservices', 'UX'],
       badge: { kind: 'shield' },
-      liveUrl: 'https://example.com',
-      codeUrl: 'https://github.com/example/repo-2',
+      liveUrl: 'https://www.siav.com',
     },
     {
-      id: 'project-3',
-      title: 'Project Three',
+      id: 'it-euro-consulting',
+      title: 'IT Euro Consulting | Fullstack Developer',
       summary:
-        'Design-system migration that unified component APIs and reduced frontend regressions across releases.',
-      tech: ['TypeScript', 'Storybook', 'Monorepo'],
+        'Delivered frontend-focused ERP capabilities and a 24/7 real-time warehouse dashboard for a major client using Angular, ASP.NET MVC, and SignalR.',
+      tech: ['Angular', 'ASP.NET MVC', 'SignalR'],
       badge: { kind: 'ring' },
-      liveUrl: 'https://example.com',
-      codeUrl: 'https://github.com/example/repo-3',
     },
     {
-      id: 'project-4',
-      title: 'Project Four',
+      id: 'qwerty-studio',
+      title: 'QWERTY Studio | Fullstack Web Developer',
       summary:
-        'Landing-to-app funnel redesign focused on conversion clarity, mobile UX, and measurable performance gains.',
-      tech: ['React', 'A/B Testing', 'Analytics'],
+        'Developed websites and applications with C# and Angular, building both frontend and backoffice systems on Umbraco CMS, including an intranet used daily by hundreds of users.',
+      tech: ['C#', 'Angular', 'Umbraco'],
       badge: { kind: 'pendant' },
-      liveUrl: 'https://example.com',
-      codeUrl: 'https://github.com/example/repo-4',
     },
     {
-      id: 'project-5',
-      title: 'Project Five',
+      id: 'scquadro',
+      title: 'SCQUADRO | Freelance Web Developer',
       summary:
-        'Developer platform toolkit with opinionated templates and CI defaults to accelerate project bootstrap.',
-      tech: ['Nx', 'CI/CD', 'Developer Experience'],
+        'Delivered websites and custom web solutions for local businesses and professionals, primarily with WordPress and bespoke implementations.',
+      tech: ['WordPress', 'Custom Websites'],
       badge: { kind: 'armor' },
-      liveUrl: 'https://example.com',
-      codeUrl: 'https://github.com/example/repo-5',
-    },
-    {
-      id: 'project-6',
-      title: 'Project Six',
-      summary:
-        'Data-heavy admin portal optimized for dense workflows with keyboard support and accessible semantics.',
-      tech: ['React', 'State Management', 'Accessibility'],
-      badge: { kind: 'sword' },
-      liveUrl: 'https://example.com',
-      codeUrl: 'https://github.com/example/repo-6',
     },
   ],
   contact: [
-    { label: 'Email', href: 'mailto:you@example.com' },
-    { label: 'GitHub', href: 'https://github.com/your-profile' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/your-profile' },
+    { label: 'Email', href: 'mailto:simone.coletta@outlook.com' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/colettasimone' },
+    { label: 'GitHub', href: 'https://github.com/collets' },
+    { label: 'Website', href: 'https://iamsimonc.dev' },
   ],
 };
