@@ -4,6 +4,8 @@
   "packageManager": "pnpm@10.16.0",
   "license": "MIT",
   "scripts": {
+    "test:personal-site": "pnpm nx run @org/personal-site:test -- --run",
+    "test:personal-site:coverage": "pnpm nx run @org/personal-site:test -- --run --coverage",
     "release": "semantic-release",
     "release:dry-run": "semantic-release --dry-run"
   },
@@ -29,6 +31,7 @@
     "@types/node": "20.19.9",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@playwright/test": "^1.55.0",
     "@vitejs/plugin-react": "^4.2.0",
     "@vitest/coverage-v8": "^4.0.0",
     "@vitest/ui": "^4.0.0",

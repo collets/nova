@@ -1,0 +1,64 @@
+{
+  "name": "@org/personal-site-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/personal-site-e2e/src",
+  "projectType": "application",
+  "tags": ["type:e2e", "scope:personal-site"],
+  "targets": {
+    "e2e-smoke": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["@org/personal-site:build"],
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "externalDependencies": ["@playwright/test"]
+        },
+        {
+          "env": "CI"
+        }
+      ],
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/personal-site-e2e"],
+      "options": {
+        "cwd": "apps/personal-site-e2e",
+        "command": "playwright test --grep @smoke"
+      }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["@org/personal-site:build"],
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "externalDependencies": ["@playwright/test"]
+        },
+        {
+          "env": "CI"
+        }
+      ],
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/personal-site-e2e"],
+      "options": {
+        "cwd": "apps/personal-site-e2e",
+        "command": "playwright test --grep \"@regression|@smoke\""
+      }
+    },
+    "e2e-headed": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["@org/personal-site:build"],
+      "options": {
+        "cwd": "apps/personal-site-e2e",
+        "command": "playwright test --headed"
+      }
+    },
+    "e2e-ui": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["@org/personal-site:build"],
+      "continuous": true,
+      "options": {
+        "cwd": "apps/personal-site-e2e",
+        "command": "playwright test --ui"
+      }
+    }
+  }
+}

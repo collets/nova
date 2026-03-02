@@ -50,4 +50,18 @@ describe('mapContactLinksToOptions', () => {
       external: true,
     });
   });
+
+  it('should mark unknown non-http links as internal and slugify id', () => {
+    const options = mapContactLinksToOptions([
+      { label: 'Calendar Invite', href: 'cal://invite-id-123' },
+    ]);
+
+    expect(options[0]).toMatchObject({
+      id: 'calendar-invite',
+      title: 'Calendar Invite',
+      detail: 'cal://invite-id-123',
+      iconKind: 'scroll-red',
+      external: false,
+    });
+  });
 });

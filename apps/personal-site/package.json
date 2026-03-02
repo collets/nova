@@ -1,5 +1,31 @@
 {
   "name": "@org/personal-site",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "nx": {
+    "targets": {
+      "test-coverage": {
+        "executor": "nx:run-commands",
+        "options": {
+          "cwd": "apps/personal-site",
+          "command": "vitest --run --coverage"
+        },
+        "inputs": [
+          "default",
+          "^production",
+          {
+            "externalDependencies": [
+              "vitest"
+            ]
+          },
+          {
+            "env": "CI"
+          }
+        ],
+        "outputs": [
+          "{projectRoot}/test-output/vitest/coverage"
+        ]
+      }
+    }
+  }
 }

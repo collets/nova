@@ -21,4 +21,28 @@ describe('buildQuestViewModels', () => {
     expect(quests[0].rewards).toContain(siteContent.projects[0].tech[0]);
     expect(quests[0].brief).toContain(siteContent.projects[0].summary);
   });
+
+  it('should fallback rewards when project tech stack is short', () => {
+    const quests = buildQuestViewModels([
+      {
+        id: 'single-tech',
+        title: 'Single tech project',
+        summary: 'A project with one technology in the stack.',
+        tech: ['Vue'],
+        badge: { kind: 'shield' },
+      },
+      {
+        id: 'no-tech',
+        title: 'No tech project',
+        summary: 'A project with empty tech stack.',
+        tech: [],
+        badge: { kind: 'ring' },
+      },
+    ]);
+
+    expect(quests[0].rewards[0]).toBe('Vue');
+    expect(quests[0].rewards[1]).toBe('React');
+    expect(quests[1].rewards[0]).toBe('TypeScript');
+    expect(quests[1].rewards[1]).toBe('React');
+  });
 });
