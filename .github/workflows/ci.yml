@@ -1,13 +1,17 @@
-name: CI
+name: CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    tags: ['v*']
   pull_request:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   quality:
@@ -35,6 +39,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm nx format:check --base=remotes/origin/main
+        if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
       - run: pnpm nx run-many -t lint test build typecheck
       - run: pnpm nx fix-ci
         if: always()
@@ -63,14 +68,81 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/personal-site/dist --project-name=${{ secrets.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.head_ref }}
 
-  deploy_production:
+  deploy_stage:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: quality
     runs-on: ubuntu-latest
+    environment: stage
+    concurrency:
+      group: deploy-stage
+      cancel-in-progress: true
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm nx build @org/personal-site
+      - name: Deploy Stage to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/personal-site/dist --project-name=${{ secrets.CLOUDFLARE_PROJECT_NAME }} --branch=stage
+
+  release_tag:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs:
+      - quality
+      - deploy_stage
+    runs-on: ubuntu-latest
+    environment: release
+    concurrency:
+      group: release-tag
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Run semantic-release (creates and pushes tag)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm release
+
+  deploy_production:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: quality
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
       - uses: pnpm/action-setup@v4
         with:
           version: 10.16.0
