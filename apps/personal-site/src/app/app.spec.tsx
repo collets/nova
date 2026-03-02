@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import App from './app';
@@ -14,20 +14,20 @@ describe('App', () => {
   });
 
   it('should render character page by route', () => {
-    const { getByRole } = render(
+    render(
       <MemoryRouter initialEntries={['/character']}>
         <App />
       </MemoryRouter>
     );
-    expect(getByRole('heading', { name: 'Character' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Character Sheet' })).toBeTruthy();
   });
 
   it('should render quests page by route', () => {
-    const { getByRole } = render(
+    render(
       <MemoryRouter initialEntries={['/quests']}>
         <App />
       </MemoryRouter>
     );
-    expect(getByRole('heading', { name: 'Quests' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Quest Board' })).toBeTruthy();
   });
 });

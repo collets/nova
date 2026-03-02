@@ -230,6 +230,5 @@ export const siteContent: SiteContent = {
     { label: 'Email', href: 'mailto:simone.coletta@outlook.com' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/colettasimone' },
     { label: 'GitHub', href: 'https://github.com/collets' },
-    { label: 'Website', href: 'https://iamsimonc.dev' },
   ],
 };

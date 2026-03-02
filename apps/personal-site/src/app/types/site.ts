@@ -1,3 +1,5 @@
+import type { BadgeKind, SkillRank } from '../domain/site/value-objects';
+
 export interface SiteConfig {
   name: string;
   role: string;
@@ -17,9 +19,9 @@ export interface NavSection {
 export interface SkillItem {
   name: string;
   description: string;
-  rank: 'Adept' | 'Expert' | 'Master' | 'Grandmaster' | 'Legendary';
+  rank: SkillRank;
   badge: {
-    kind: 'shield' | 'sword' | 'ring' | 'pendant' | 'armor';
+    kind: BadgeKind;
   };
 }
 
@@ -37,7 +39,7 @@ export interface ProjectEntry {
   summary: string;
   tech: string[];
   badge: {
-    kind: 'shield' | 'sword' | 'ring' | 'pendant' | 'armor';
+    kind: BadgeKind;
   };
   liveUrl?: string;
   codeUrl?: string;
