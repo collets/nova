@@ -67,7 +67,16 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - name: Verify release token is configured
+        env:
+          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        run: |
+          if [ -z "${RELEASE_TOKEN}" ]; then
+            echo "RELEASE_TOKEN is required to trigger tag workflows from semantic-release."
+            echo "Create a repository secret named RELEASE_TOKEN with repo/workflow scopes."
+            exit 1
+          fi
       - name: Run semantic-release (creates and pushes tag)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: pnpm release
