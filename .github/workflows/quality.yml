@@ -1,0 +1,45 @@
+name: Quality
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+      # This enables task distribution via Nx Cloud.
+      # It must run after install so the local nx binary is available.
+      - run: pnpm nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="test"
+      - run: pnpm exec playwright install --with-deps chromium
+
+      - run: pnpm nx format:check --base=remotes/origin/main
+        if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+      - run: pnpm nx run-many -t lint build typecheck test-coverage e2e-smoke e2e
+      - name: Upload personal-site coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: personal-site-coverage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: apps/personal-site/test-output/vitest/coverage
+          if-no-files-found: warn
+          retention-days: 14
+      - run: pnpm nx fix-ci
+        if: always()

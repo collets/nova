@@ -6,6 +6,7 @@
     "targets": {
       "test-coverage": {
         "executor": "nx:run-commands",
+        "cache": true,
         "options": {
           "cwd": "apps/personal-site",
           "command": "vitest --run --coverage"
