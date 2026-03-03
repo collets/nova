@@ -21,7 +21,7 @@
       "outputs": ["{workspaceRoot}/dist/.playwright/apps/personal-site-e2e"],
       "options": {
         "cwd": "apps/personal-site-e2e",
-        "command": "playwright test --grep @smoke"
+        "command": "PLAYWRIGHT_WEB_SERVER_PORT=4201 playwright test --grep @smoke"
       }
     },
     "e2e": {
@@ -40,7 +40,7 @@
       "outputs": ["{workspaceRoot}/dist/.playwright/apps/personal-site-e2e"],
       "options": {
         "cwd": "apps/personal-site-e2e",
-        "command": "playwright test --grep \"@regression|@smoke\""
+        "command": "PLAYWRIGHT_WEB_SERVER_PORT=4202 playwright test --grep \"@regression|@smoke\""
       }
     },
     "e2e-headed": {
@@ -48,7 +48,7 @@
       "dependsOn": ["@org/personal-site:build"],
       "options": {
         "cwd": "apps/personal-site-e2e",
-        "command": "playwright test --headed"
+        "command": "PLAYWRIGHT_WEB_SERVER_PORT=4200 playwright test --headed"
       }
     },
     "e2e-ui": {
@@ -57,7 +57,7 @@
       "continuous": true,
       "options": {
         "cwd": "apps/personal-site-e2e",
-        "command": "playwright test --ui"
+        "command": "PLAYWRIGHT_WEB_SERVER_PORT=4200 playwright test --ui"
       }
     }
   }

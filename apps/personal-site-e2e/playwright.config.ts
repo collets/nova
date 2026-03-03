@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const webServerPort = Number(process.env.PLAYWRIGHT_WEB_SERVER_PORT ?? '4200');
+
 export default defineConfig({
   testDir: './src',
   timeout: 30_000,
@@ -10,7 +12,7 @@ export default defineConfig({
   reporter: 'html',
   outputDir: '../../dist/.playwright/apps/personal-site-e2e/test-results',
   use: {
-    baseURL: 'http://localhost:4200',
+    baseURL: `http://localhost:${webServerPort}`,
     trace: 'on-first-retry',
   },
   expect: {
@@ -18,8 +20,8 @@ export default defineConfig({
   },
   webServer: {
     command:
-      'pnpm --dir apps/personal-site exec vite --host localhost --port 4200 --strictPort',
-    url: 'http://localhost:4200',
+      `pnpm --dir apps/personal-site exec vite --host localhost --port ${webServerPort} --strictPort`,
+    url: `http://localhost:${webServerPort}`,
     reuseExistingServer: !process.env.CI,
     cwd: '../../',
   },
