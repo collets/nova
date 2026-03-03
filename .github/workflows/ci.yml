@@ -73,7 +73,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/personal-site/dist --project-name=${{ secrets.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.head_ref }}
+          command: pages deploy apps/personal-site/dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.head_ref }}
 
   deploy_stage:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -101,7 +101,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/personal-site/dist --project-name=${{ secrets.CLOUDFLARE_PROJECT_NAME }} --branch=stage
+          command: pages deploy apps/personal-site/dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=stage
 
   release_tag:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -164,4 +164,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/personal-site/dist --project-name=${{ secrets.CLOUDFLARE_PROJECT_NAME }} --branch=main
+          command: pages deploy apps/personal-site/dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=main
