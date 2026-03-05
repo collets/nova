@@ -261,6 +261,8 @@ a {
 
 .page-header-menu-button.pixel-button {
   display: none;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .page-header-menu-button.pixel-button.is-hidden {
@@ -489,6 +491,9 @@ a {
 
 .page-header-title {
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 h2.page-header-title {
@@ -1929,7 +1934,12 @@ h2.page-header-title {
   }
 
   .page-header-menu-button.pixel-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    padding: var(--space-2) var(--space-2);
+    font-size: var(--type-size-caption-default);
   }
 
   .side-nav--desktop {
@@ -1940,6 +1950,8 @@ h2.page-header-title {
     padding: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
+    min-height: 100svh;
     max-width: none;
   }
 
@@ -1955,10 +1967,15 @@ h2.page-header-title {
     display: flex;
     width: 100vw;
     min-height: 100vh;
+    min-height: 100dvh;
     max-height: 100vh;
+    max-height: 100dvh;
     border-radius: 0;
-    overflow: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     padding: calc(var(--space-4) - 3px);
+    padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom));
     box-shadow: none;
   }
 
