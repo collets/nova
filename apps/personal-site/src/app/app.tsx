@@ -43,6 +43,10 @@ export function App() {
     setIsNavOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
   const handleCloseMenu = useCallback(() => {
     setIsNavOpen(false);
   }, []);

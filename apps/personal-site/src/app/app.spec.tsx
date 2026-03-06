@@ -4,6 +4,8 @@ import { MemoryRouter } from 'react-router-dom';
 import App from './app';
 
 describe('App', () => {
+  const originalScrollTo = window.scrollTo;
+
   beforeAll(() => {
     Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
       configurable: true,
@@ -21,6 +23,7 @@ describe('App', () => {
 
   afterEach(() => {
     window.innerWidth = 1024;
+    window.scrollTo = originalScrollTo;
     act(() => {
       window.dispatchEvent(new Event('resize'));
     });
@@ -101,6 +104,19 @@ describe('App', () => {
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: 'Quest Board' })).toBeTruthy();
       expect(screen.queryByRole('button', { name: 'Close Menu' })).toBeNull();
+    });
+  });
+
+  it('should scroll to top on route change', async () => {
+    const scrollToSpy = vi.fn();
+    window.scrollTo = scrollToSpy;
+    renderApp('/character');
+    scrollToSpy.mockClear();
+
+    fireEvent.click(screen.getByRole('link', { name: /Quests/i }));
+
+    await waitFor(() => {
+      expect(scrollToSpy).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'auto' });
     });
   });
 
